@@ -10,14 +10,14 @@ const Head = () => {
         <img
           className="h-16 px-4"
           src={
-            "https://lh3.googleusercontent.com/3zkP2SYe7yYoKKe47bsNe44yTgb4Ukh__rBbwXwgkjNRe4PykGG409ozBxzxkrubV7zHKjfxq6y9ShogWtMBMPyB3jiNps91LoNH8A=s500"
+            "https://lh3.googleusercontent.com/3zkP2SYe7yYoKKe47bsNe44yTgb4Ukh__rBbwXwgkjNRe4PykGG409ozBxzxkrubV7zHKjfxq6y9ShogWtMBMPyB3jiNps91LoNH8A"
           }
           alt="youtube-logo"
         />
       </div>
       <div className="col-span-10">
         <input
-          className="w-96 border border-gray-500 py-2 rounded-l-full outline-none"
+          className="w-96 border border-gray-500 py-2 px-3 rounded-l-full outline-none"
           type="text"
           name="search-box"
         />
