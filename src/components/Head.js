@@ -1,10 +1,19 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { toggleMenu } from "../utils/appSlice";
 
 const Head = () => {
+  const dispatch = useDispatch();
+  const handleToggleMenu = () => {
+    dispatch(toggleMenu());
+  };
   return (
     <div className="grid grid-flow-col px-2 shadow-lg place-items-center">
       <div className="flex items-center px-2">
-        <span className="text-3xl">
+        <span
+          className="text-3xl cursor-pointer"
+          onClick={handleToggleMenu}
+        >
           <i class="fa-solid fa-bars"></i>
         </span>
         <img

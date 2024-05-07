@@ -6,8 +6,13 @@ import { LiaGripfire } from "react-icons/lia";
 import { MdHomeFilled, MdSubscriptions } from "react-icons/md";
 import { PiFilmSlateFill } from "react-icons/pi";
 import { SiYoutubegaming } from "react-icons/si";
+import { useSelector } from "react-redux";
 
 const Sidebar = () => {
+  const menuToggle = useSelector((store) => store.app.isMenuOpen);
+  //Early return
+  if (!menuToggle) return null;
+
   return (
     <div className="w-52 py-2 px-2 h-screen shadow-lg">
       <ul>
