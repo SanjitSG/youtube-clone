@@ -15,16 +15,14 @@ const ButtonList = () => {
     "Birds",
     "Europe",
     "Camera",
-    // "Boxing",
-    // "Chess",
-    // "Waterfall",
-    // "React",
-    // "Health",
   ];
   return (
     <div className="flex">
       {list.map((category) => (
-        <Button name={category} />
+        <Button
+          key={category}
+          name={category}
+        />
       ))}
     </div>
   );
