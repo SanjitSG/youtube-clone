@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { toggleMenu } from "../utils/appSlice";
+import { Link } from "react-router-dom";
 
 const Head = () => {
   const dispatch = useDispatch();
@@ -8,7 +9,7 @@ const Head = () => {
     dispatch(toggleMenu());
   };
   return (
-    <div className="grid grid-flow-col px-2 shadow-lg place-items-center">
+    <div className="grid grid-flow-col px-2 shadow-sm place-items-center">
       <div className="flex items-center px-2">
         <span
           className="text-3xl cursor-pointer"
@@ -16,6 +17,7 @@ const Head = () => {
         >
           <i class="fa-solid fa-bars"></i>
         </span>
+
         <img
           className="h-16 px-4"
           src={
