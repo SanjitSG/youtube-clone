@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toggleMenu } from "../utils/appSlice";
 import { SEARCH_API } from "../utils/Constants";
+import { cacheResults } from "../utils/cacheSlice";
 
 const Head = () => {
   const [search, setSearch] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
+  const cache = useSelector((store) => store.cache);
   const dispatch = useDispatch();
-
   const handleToggleMenu = () => {
     dispatch(toggleMenu());
   };
@@ -18,7 +19,14 @@ const Head = () => {
   };
 
   useEffect(() => {
-    const timer = setTimeout(() => getSuggestions(), 200);
+    const timer = setTimeout(() => {
+      if (cache[search]) {
+        console.log(cache);
+        setSuggestions(cache[search]);
+      } else {
+        getSuggestions();
+      }
+    }, 200);
 
     return () => {
       clearTimeout(timer);
@@ -26,12 +34,16 @@ const Head = () => {
   }, [search]);
 
   const getSuggestions = async () => {
-    if (search) {
-      const data = await fetch(SEARCH_API + search);
-      const json = await data.json();
-      setSuggestions(json[1]);
-      console.log(json[1]);
-    }
+    const data = await fetch(SEARCH_API + search);
+    const json = await data.json();
+    setSuggestions(json[1]);
+
+    // update cache
+    dispatch(
+      cacheResults({
+        [search]: json[1],
+      })
+    );
   };
 
   return (
