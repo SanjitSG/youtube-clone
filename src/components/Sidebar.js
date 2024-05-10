@@ -15,7 +15,7 @@ const Sidebar = () => {
   if (!menuToggle) return null;
 
   return (
-    <div className="w-52 py-2 px-2 h-screen shadow-lg sticky top-0">
+    <div className="w-52 py-2 px-2 h-screen shadow-lg">
       <ul>
         <Link to="/">
           <li className="flex items-center justify-start gap-3 px-3 py-2 text-lg rounded-lg  cursor-pointer hover:bg-slate-200 ">

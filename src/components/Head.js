@@ -6,6 +6,7 @@ import { SEARCH_API } from "../utils/Constants";
 const Head = () => {
   const [search, setSearch] = useState("");
   const [suggestions, setSuggestions] = useState([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
   const dispatch = useDispatch();
 
   const handleToggleMenu = () => {
@@ -34,7 +35,7 @@ const Head = () => {
   };
 
   return (
-    <div className="grid grid-flow-col px-2 shadow-sm place-items-center">
+    <div className="grid grid-flow-col px-2 shadow-sm place-items-center sticky top-0 bg-white">
       <div className="flex items-center px-2">
         <span
           className="text-3xl cursor-pointer"
@@ -53,15 +54,36 @@ const Head = () => {
       </div>
       <div className="col-span-10">
         <input
-          className="w-96 border border-gray-500 py-2 px-3 rounded-l-full outline-none"
+          className="w-[28rem] border border-gray-500 py-2 px-3 rounded-l-full outline-none"
           type="text"
           name="search-box"
           onChange={handleSearch}
+          onClick={() => setShowSuggestions(true)}
+          onBlur={() => setShowSuggestions(false)}
         />
-        <button className=" border border-gray-500 px-5 py-2 rounded-r-full bg-slate-300">
+        <button
+          className=" border border-gray-500 px-5 py-2 rounded-r-full bg-slate-300"
+          onClick={() => setShowSuggestions(true)}
+          onBlur={() => setShowSuggestions(false)}
+        >
           <i class="fa-solid fa-magnifying-glass"></i>
         </button>
+        {showSuggestions && (
+          <div className="fixed bg-white w-3/12 border m-3 p-3 rounded-lg shadow-lg">
+            <ul>
+              {suggestions.map((i) => (
+                <li
+                  key={i}
+                  className="px-2 py-1 flex justify-start gap-9 items-center hover:bg-slate-200 rounded-lg cursor-pointer"
+                >
+                  <i class="fas fa-search"></i> {i}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
+
       <div className="col-span-1">
         <span className="text-3xl">
           <i class="fa-solid fa-circle-user"></i>
