@@ -1,13 +1,38 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { toggleMenu } from "../utils/appSlice";
-import { Link } from "react-router-dom";
+import { SEARCH_API } from "../utils/Constants";
 
 const Head = () => {
+  const [search, setSearch] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
   const dispatch = useDispatch();
+
   const handleToggleMenu = () => {
     dispatch(toggleMenu());
   };
+
+  const handleSearch = (e) => {
+    setSearch(e.target.value);
+  };
+
+  useEffect(() => {
+    const timer = setTimeout(() => getSuggestions(), 200);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [search]);
+
+  const getSuggestions = async () => {
+    if (search) {
+      const data = await fetch(SEARCH_API + search);
+      const json = await data.json();
+      setSuggestions(json[1]);
+      console.log(json[1]);
+    }
+  };
+
   return (
     <div className="grid grid-flow-col px-2 shadow-sm place-items-center">
       <div className="flex items-center px-2">
@@ -31,6 +56,7 @@ const Head = () => {
           className="w-96 border border-gray-500 py-2 px-3 rounded-l-full outline-none"
           type="text"
           name="search-box"
+          onChange={handleSearch}
         />
         <button className=" border border-gray-500 px-5 py-2 rounded-r-full bg-slate-300">
           <i class="fa-solid fa-magnifying-glass"></i>
