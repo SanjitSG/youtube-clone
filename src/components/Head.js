@@ -72,6 +72,7 @@ const Head = () => {
           onChange={handleSearch}
           onClick={() => setShowSuggestions(true)}
           onBlur={() => setShowSuggestions(false)}
+          autoComplete="off"
         />
         <button
           className=" border border-gray-500 px-5 py-2 rounded-r-full bg-slate-300"
