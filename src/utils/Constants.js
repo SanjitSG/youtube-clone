@@ -4,7 +4,5 @@ export const YOUTUBE_API =
 
 export const SEARCH_API =
   "http://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=";
-// export const SEARCH_API =
-//   "https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=10&key=" +
-//   process.env.REACT_APP_API_KEY +
-//   "&q=";
+
+export const LIVE_CHAT_COUNT = 25;
